@@ -1,0 +1,19 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/Inventory
+    driverClassName: com.mysql.cj.jdbc.Driver
+    username: repuser
+    password: reppass
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:schema.sql
+      data-locations: classpath:data.sql    
+  devtools:
+    livereload:
+      enabled: true
+    restart:
+      enabled: true
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
