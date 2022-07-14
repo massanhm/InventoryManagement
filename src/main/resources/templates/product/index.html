@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
+  <head>
+    <meta charset="UTF-8">
+    <title th:text="${title}">Insert title here</title>
+  </head>
+
+<body>
+<div layout:fragment="content">
+    <h1 th:text="${title}">タイトル</h1>
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">登録番号</th>
+          <th scope="col">製品名/単位</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="product : ${productList}">
+          <td  scope="row" th:text="${product.product_id}">(id)</td>
+          <td th:text="${product.name}">(name)</td>
+        </tr>
+
+      </tbody>
+    </table>
+</div>
+</body>
+</html>
