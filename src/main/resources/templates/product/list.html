@@ -21,15 +21,10 @@
         </tr>
       </thead>
       <tbody>
-        <tr th:each="product : ${productList}" th:object="${product}">
-          <td  scope="row" th:text="${product.product_id}">(id)</td>
+        <tr th:each="product : ${productList}">
+          <td th:text="${product.product_id}">(id)</td>
           <td th:text="${product.name}">(name)</td>
           <td><a class="btn btn-link" th:href="@{/product/{product_id}/edit(product_id=${product.product_id})}">編集</a></td>
-          <!-- <td>
-            <form th:action="@{/product/{product_id}(product_id=${product.product_id}" th:method="delete">
-                 <input class="btn btn-warning" type="submit" value="削除"/>
-            </form>
-          </td> -->
         </tr>
 
       </tbody>

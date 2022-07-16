@@ -26,7 +26,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ProductController {
 
-    private final ProductService productservice;
+    private final ProductService productService;
 
     /**
      * 製品登録フォームを表示
@@ -61,7 +61,7 @@ public class ProductController {
     }
 
     /*
-     * 登録処理
+     * 商品情報の登録
      */
     @PostMapping("/complete")
     public String complete(
@@ -76,7 +76,7 @@ public class ProductController {
             return "product/form";
         }
 
-        productservice.create(productForm.getName());
+        productService.create(productForm.getName());
         redirectAttributes.addFlashAttribute("complete", "登録完了しました。");
 
         return "redirect:/product/form";
@@ -87,7 +87,7 @@ public class ProductController {
      */
     @GetMapping("/list")
     public String showList(Model model) {
-        List<Product> list = productservice.findAll();
+        List<Product> list = productService.findAll();
 
         model.addAttribute("title", "製品一覧");
         model.addAttribute("productList", list);
@@ -99,11 +99,53 @@ public class ProductController {
      *一件データを取得し編集ページを表示する
      */
     @GetMapping("/{product_id}/edit")
-    public String edit(@PathVariable("product_id") int product_id, Model model) {
-        Optional<Product> productOpt = productservice.findById(product_id);
+    public String edit(
+            ProductForm productForm,
+            @PathVariable("product_id") int product_id,
+            Model model) {
+        Optional<Product> productOpt = productService.findById(product_id);
 
-        model.addAttribute("product", productOpt);
+        Optional<ProductForm> productFromOpt = productOpt.map(t -> makeProductForm(t));
+
+        if (productFromOpt.isPresent()) {
+            productForm = productFromOpt.get();
+        }
+
+        model.addAttribute("title", "商品情報　編集画面");
+        model.addAttribute("product", productForm);
 
         return "product/edit";
+    }
+
+    /*
+     * 商品情報の更新
+     */
+    @PostMapping("/update")
+    public String update(
+            @Validated @ModelAttribute ProductForm productForm,
+            BindingResult result,
+            @PathVariable("product_id") int product_id,
+            Model model,
+            RedirectAttributes redirectAttributes
+            ) {
+
+            if (result.hasErrors()) {
+                model.addAttribute("title", "製品登録画面");
+
+                return "product/edit";
+            } else {
+                return "";
+            }
+        }
+
+    /*
+     * ProductのデータをProductFormに入れて返す
+     */
+    private ProductForm makeProductForm(Product product) {
+        ProductForm productForm = new ProductForm();
+
+        productForm.setName(product.getName());
+
+        return productForm;
     }
 }

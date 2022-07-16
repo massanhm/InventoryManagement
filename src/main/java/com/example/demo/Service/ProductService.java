@@ -30,4 +30,11 @@ public class ProductService {
    public void create(String name) {
        productMapper.insert(name);
    }
+
+   @Transactional
+   public void update(String name) {
+       productMapper.update(name);
+   }
+
+
 }

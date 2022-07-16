@@ -11,12 +11,15 @@ import com.example.demo.entity.Product;
 @Mapper
 public interface ProductMapper {
 
-    @Select("select * from products")
+    @Select("SELECT * FROM products")
     List<Product> findAll();
+
+    @Select("INSERT INTO products (name) values (#{name})")
+    void insert(String name);
 
     @Select("SELECT * FROM products WHERE product_id = #{product_id}")
     Optional<Product> findById(int product_id);
 
-    @Select("insert into products (name) values (#{name})")
-    void insert(String name);
+    @Select("UPDATE products SET name = #{name} WHERE product_id = #{product_id}")
+    int update(String name);
 }
