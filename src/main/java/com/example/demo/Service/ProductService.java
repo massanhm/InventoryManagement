@@ -1,6 +1,7 @@
 package com.example.demo.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -19,4 +20,8 @@ public class ProductService {
     public List<Product> findAll() {
         return productMapper.findAll();
     }
+
+   public Optional<Product> findById(int product_id) {
+       return productMapper.findById(product_id);
+   }
 }

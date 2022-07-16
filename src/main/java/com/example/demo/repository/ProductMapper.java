@@ -1,6 +1,7 @@
 package com.example.demo.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -13,6 +14,7 @@ public interface ProductMapper {
     @Select("select * from products")
     List<Product> findAll();
 
-//    @Select("SELECT * FROM product WHERE product_id; = #{product_id;}")
-//    Product search(ProductSearchRequest product);
+    @Select("SELECT * FROM products WHERE product_id = #{product_id}")
+    Optional<Product> findById(int product_id);
+
 }
