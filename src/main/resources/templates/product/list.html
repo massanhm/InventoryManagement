@@ -11,18 +11,25 @@
 <body>
 <div layout:fragment="content">
     <h1 th:text="${title}">タイトル</h1>
-
+    <a class="btn btn-primary" href="/product/form">＋　商品を登録する</a>
     <table class="table table-striped">
       <thead>
         <tr>
           <th scope="col">登録番号</th>
-          <th scope="col">製品名/単位</th>
+          <th scope="col">商品名/単位</th>
+          <th scope="col">操作</th>
         </tr>
       </thead>
       <tbody>
-        <tr th:each="product : ${productList}">
+        <tr th:each="product : ${productList}" th:object="${product}">
           <td  scope="row" th:text="${product.product_id}">(id)</td>
           <td th:text="${product.name}">(name)</td>
+          <td><a class="btn btn-link" th:href="@{/product/{product_id}/edit(product_id=${product.product_id})}">編集</a></td>
+          <!-- <td>
+            <form th:action="@{/product/{product_id}(product_id=${product.product_id}" th:method="delete">
+                 <input class="btn btn-warning" type="submit" value="削除"/>
+            </form>
+          </td> -->
         </tr>
 
       </tbody>

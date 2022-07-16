@@ -13,12 +13,13 @@
     <h2 th:text="${complete}"></h2>
     <form action="#" th:action="@{/product/confirm}" method="post" th:object="${productForm}">
         <div class="mt-3">
-            <label for="productInput" class="form-label">製品名/単位</label>
+            <label for="productInput" class="form-label">商品名/単位</label>
             <input type="text" name="name" class="form-control" id="name" th:value="*{name}">
             <div class="text-danger mb-4" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
         </div>
-        <div class="mt-3">
-            <button type="submit" class="btn btn-primary">登録</button>
+        <div class="text-center mt-3">
+            <input type="submit" class="btn btn-primary" value="　保存　">
+            <a class="btn btn-secondary" th:href="@{/product/list}">キャンセル</a>
         </div>
     </form>
 </div>
