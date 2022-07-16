@@ -17,4 +17,6 @@ public interface ProductMapper {
     @Select("SELECT * FROM products WHERE product_id = #{product_id}")
     Optional<Product> findById(int product_id);
 
+    @Select("insert into products (name) values (#{name})")
+    void insert(String name);
 }

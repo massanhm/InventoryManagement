@@ -36,6 +36,7 @@ public class ProductController {
             Model model,
             @ModelAttribute("complete") String complete) {
         model.addAttribute("title", "製品登録画面");
+
         return "product/form";
     }
 
@@ -55,23 +56,31 @@ public class ProductController {
             return "product/form";
         }
         model.addAttribute("title", "確認画面");
+
         return "product/confirm";
     }
 
+    /*
+     * 登録処理
+     */
     @PostMapping("/complete")
     public String complete(
-            @Validated ProductForm productForm,
+            @Validated @ModelAttribute ProductForm productForm,
             BindingResult result,
             Model model,
             RedirectAttributes redirectAttributes) {
+
         if (result.hasErrors()) {
             model.addAttribute("title", "製品登録画面");
+
             return "product/form";
         }
+
+        productservice.create(productForm.getName());
         redirectAttributes.addFlashAttribute("complete", "登録完了しました。");
+
         return "redirect:/product/form";
     }
-
 
     /**
      * 製品一覧を表示
@@ -79,8 +88,10 @@ public class ProductController {
     @GetMapping("/list")
     public String showList(Model model) {
         List<Product> list = productservice.findAll();
+
         model.addAttribute("title", "製品一覧");
         model.addAttribute("productList", list);
+
         return "product/list";
     }
 
@@ -92,7 +103,7 @@ public class ProductController {
         Optional<Product> productOpt = productservice.findById(product_id);
 
         model.addAttribute("product", productOpt);
+
         return "product/edit";
     }
-
 }
