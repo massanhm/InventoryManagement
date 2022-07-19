@@ -10,7 +10,6 @@
 <body>
 <div layout:fragment="content">
     <h1 th:text="${title}">タイトル</h1>
-    <h2 th:text="${complete}"></h2>
     <form action="#" th:action="@{/product/confirm}" method="post" th:object="${productForm}">
         <div class="mt-3">
             <label for="productInput" class="form-label">商品名/単位</label>

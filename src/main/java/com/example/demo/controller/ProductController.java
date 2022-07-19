@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.Form.ProductForm;
@@ -32,7 +33,8 @@ public class ProductController {
      * 製品登録フォームを表示
      */
     @GetMapping("/form")
-    public String form(ProductForm productForm,
+    public String form(
+            ProductForm productForm,
             Model model,
             @ModelAttribute("complete") String complete) {
         model.addAttribute("title", "製品登録画面");
@@ -50,7 +52,10 @@ public class ProductController {
 
 
     @PostMapping("/confirm")
-    public String confirm(@Validated ProductForm productForm, BindingResult result, Model model) {
+    public String confirm(
+            @Validated ProductForm productForm,
+            BindingResult result,
+            Model model) {
         if (result.hasErrors()) {
             model.addAttribute("title", "製品登録画面");
             return "product/form";
@@ -70,27 +75,30 @@ public class ProductController {
             Model model,
             RedirectAttributes redirectAttributes) {
 
+        Product product = makeProduct(productForm, 0);
+
         if (result.hasErrors()) {
+            model.addAttribute("productForm", productForm);
             model.addAttribute("title", "製品登録画面");
 
             return "product/form";
         }
 
-        productService.create(productForm.getName());
+        productService.create(product);
         redirectAttributes.addFlashAttribute("complete", "登録完了しました。");
 
-        return "redirect:/product/form";
+        return "redirect:/product/list";
     }
 
     /**
      * 製品一覧を表示
      */
     @GetMapping("/list")
-    public String showList(Model model) {
+    public String showList(ProductForm productForm, Model model) {
         List<Product> list = productService.findAll();
 
         model.addAttribute("title", "製品一覧");
-        model.addAttribute("productList", list);
+        model.addAttribute("list", list);
 
         return "product/list";
     }
@@ -98,12 +106,12 @@ public class ProductController {
     /**
      *一件データを取得し編集ページを表示する
      */
-    @GetMapping("/{product_id}/edit")
+    @GetMapping("/{id}")
     public String edit(
             ProductForm productForm,
-            @PathVariable("product_id") int product_id,
+            @PathVariable("id") int id,
             Model model) {
-        Optional<Product> productOpt = productService.findById(product_id);
+        Optional<Product> productOpt = productService.getProduct(id);
 
         Optional<ProductForm> productFromOpt = productOpt.map(t -> makeProductForm(t));
 
@@ -111,8 +119,9 @@ public class ProductController {
             productForm = productFromOpt.get();
         }
 
+        model.addAttribute("productForm", productForm);
+        model.addAttribute("id", id);
         model.addAttribute("title", "商品情報　編集画面");
-        model.addAttribute("product", productForm);
 
         return "product/edit";
     }
@@ -122,21 +131,28 @@ public class ProductController {
      */
     @PostMapping("/update")
     public String update(
-            @Validated @ModelAttribute ProductForm productForm,
-            BindingResult result,
-            @PathVariable("product_id") int product_id,
-            Model model,
-            RedirectAttributes redirectAttributes
-            ) {
+        @Validated @ModelAttribute ProductForm productForm,
+        @RequestParam("id") int id,
+        BindingResult result,
+        Model model,
+        RedirectAttributes redirectAttributes
+        ) {
 
-            if (result.hasErrors()) {
-                model.addAttribute("title", "製品登録画面");
+        Product product = makeProduct(productForm, id);
 
-                return "product/edit";
-            } else {
-                return "";
-            }
+        if (result.hasErrors()) {
+            model.addAttribute("title", "商品情報　編集画面");
+            model.addAttribute("product", productForm);
+
+            return "product/edit";
+        } else {
+
+            productService.update(product);
+            redirectAttributes.addFlashAttribute("complete", "変更が完了しました");
+
+            return "redirect:/product/list";
         }
+    }
 
     /*
      * ProductのデータをProductFormに入れて返す
@@ -147,5 +163,14 @@ public class ProductController {
         productForm.setName(product.getName());
 
         return productForm;
+    }
+
+    private Product makeProduct(ProductForm productForm, int id) {
+        Product product = new Product();
+
+        product.setId(id);
+        product.setName(productForm.getName());
+
+        return product;
     }
 }

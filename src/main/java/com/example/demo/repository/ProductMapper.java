@@ -3,8 +3,10 @@ package com.example.demo.repository;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.example.demo.entity.Product;
 
@@ -14,12 +16,12 @@ public interface ProductMapper {
     @Select("SELECT * FROM products")
     List<Product> findAll();
 
-    @Select("INSERT INTO products (name) values (#{name})")
-    void insert(String name);
+    @Insert("INSERT INTO products (name) values (#{name})")
+    void insert(Product product);
 
-    @Select("SELECT * FROM products WHERE product_id = #{product_id}")
+    @Select("SELECT * FROM products WHERE id = #{id}")
     Optional<Product> findById(int product_id);
 
-    @Select("UPDATE products SET name = #{name} WHERE product_id = #{product_id}")
-    int update(String name);
+    @Update("UPDATE products SET name = #{name} WHERE id = #{id}")
+    int update(Product product);
 }
