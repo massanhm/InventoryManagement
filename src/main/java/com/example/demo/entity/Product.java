@@ -1,13 +1,17 @@
 package com.example.demo.entity;
 
-import lombok.AllArgsConstructor;
+import java.util.List;
+
+import groovy.transform.ToString;
 import lombok.Data;
 
 @Data
-@AllArgsConstructor
+@ToString(excludes = {"inventorys"})
 public class Product {
 
-    private int product_id;
+    private int id;
 
     private String name;
+
+    private List<Inventory> inventorys;
 }
