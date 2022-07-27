@@ -10,7 +10,9 @@ public class Inventory {
 
     private int id;
 
-    private Product productName;
+    private int productsId;
+
+    private Product productsName;
 
     private float quantity;
 

@@ -13,7 +13,7 @@
     <h1 th:text="${title}">在庫検索</h1>
     <p th:if="${complete}" th:text="${complete}"></p>
 
-    <form method="POST" th:action="@{/inventory/search}" th:object="${InventorySearchReq}">
+    <form method="POST" th:action="@{/inventory/id_search}" th:object="${InventorySearchReq}">
         <label>日付：</label>
         <input type="date" name="reportDate"/>
         <input type="submit" class="btn btn-primary" value="　検索　">
@@ -26,15 +26,16 @@
           <th scope="col">商品名/単位</th>
           <th scope="col">在庫数</th>
           <th scope="col">最終更新日時</th>
+          <th scope="col"></th>
         </tr>
       </thead>
       <tbody>
         <tr th:each="obj : ${list}">
           <td th:text="${obj.id}">(id)</td>
-          <td th:text="${obj.product.name}">(商品名)</td>
+          <td th:text="${obj.productsName.name}">(商品名)</td>
           <td th:text="${obj.quantity}">(在庫数)</td>
           <td th:text="${obj.updatedAt}">(最終更新日時)</td>
-          <td><a class="btn btn-link" th:href="@{/inventory/{id}(id=${invetory.id})}">編集</a></td>
+          <td><a class="btn btn-link">編集</a></td>
         </tr>
 
       </tbody>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.repository.InventoryMapper">
+    <select id="findByDate" resultMap="InvResultMap">
+        SELECT
+            I.id,
+            I.products_id,
+            I.quantity,
+            I.report_date,
+            I.created_at,
+            I.updated_at,
+            P.name
+        FROM
+            inventorys AS I
+        INNER JOIN
+            products AS P ON I.products_id = P.id
+        WHERE I.report_date = #{sqlDate}
+    </select>
+
+    <resultMap id="InvResultMap" type="com.example.demo.entity.Inventory">
+        <id column="id" property="id"/>
+        <result column="quantity" property="quantity" />
+        <result column="report_date" property="reportDate" />
+        <result column="created_at" property="createdAt" />
+        <result column="updated_at" property="updatedAt" />
+        <result column="quantity" property="quantity" />
+
+        <association property="productsName" javaType="com.example.demo.entity.Product">
+            <id column="id" property="id"/>
+            <result column="name" property="name" />
+        </association>
+    </resultMap>
+</mapper>
