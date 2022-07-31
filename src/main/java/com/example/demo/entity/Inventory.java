@@ -18,7 +18,5 @@ public class Inventory {
 
     private Date reportDate;
 
-    private LocalDateTime createdAt;
-
     private LocalDateTime updatedAt;
 }
