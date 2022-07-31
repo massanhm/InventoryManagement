@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
+  <head>
+    <meta charset="UTF-8">
+    <title th:text="${title}">Insert title here</title>
+  </head>
+
+<body>
+<div layout:fragment="content">
+    <h1 th:text="${title}">在庫入力画面</h1>
+    <form method="POST" th:object="${inventoryForm}">
+        <table>
+            <tr>
+                <td><label>商品名（選択してください）：</label></td>
+                <td>
+                    <input type="text" name="name" list="productId" />
+                    <datalist id="productId" th:field="productId">
+                        <option th:each="product : ${prodList}" th:inline="text" th:utext="${product.name}"  th:filed="${product.id}">
+                        </option>
+                    </datalist>
+                </td>
+
+            </tr>
+            <tr>
+                <td><label>在庫数：</label></td>
+                <td><input type="number" name="quantity" th:value="*{quantity}" /></td>
+            </tr>
+            <tr>
+                <td><label>日付：</label></td>
+                <td><input type="date" name="reportDate" th:value="*{reportDate}" /></td>
+            </tr>
+        </table>
+        <input  th:if="${productId}" type="hidden" name="productId" th:value="${productId}">
+        <input type="submit" value="送信" />
+    </form>
+</div>
+</body>
+</html>

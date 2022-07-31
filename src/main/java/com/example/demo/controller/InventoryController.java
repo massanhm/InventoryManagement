@@ -10,9 +10,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.demo.Form.InventoryForm;
 import com.example.demo.Form.InventorySearchReq;
 import com.example.demo.Service.InventoryService;
+import com.example.demo.Service.ProductService;
 import com.example.demo.entity.Inventory;
+import com.example.demo.entity.Product;
 
 import lombok.RequiredArgsConstructor;
 
@@ -22,6 +25,7 @@ import lombok.RequiredArgsConstructor;
 public class InventoryController {
 
     private final InventoryService inventoryService;
+    private final ProductService productService;
 
     /**
      * 指定日の在庫数検索画面を表示
@@ -55,8 +59,15 @@ public class InventoryController {
         return "inventory/index";
     }
 
-
-
+    /*
+     * 在庫情報の追加ページを表示する
+     */
+    @GetMapping("/form")
+    public String form(InventoryForm inventoryForm, Model model) {
+        List<Product> prodList = productService.findAll();
+        model.addAttribute("prodList", prodList);
+       return "inventory/form";
+    }
 
 }
 
