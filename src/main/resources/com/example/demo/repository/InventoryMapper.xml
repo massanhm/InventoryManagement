@@ -7,7 +7,6 @@
             I.products_id,
             I.quantity,
             I.report_date,
-            I.created_at,
             I.updated_at,
             P.name
         FROM
@@ -17,11 +16,11 @@
         WHERE I.report_date = #{sqlDate}
     </select>
 
+
     <resultMap id="InvResultMap" type="com.example.demo.entity.Inventory">
         <id column="id" property="id"/>
         <result column="quantity" property="quantity" />
         <result column="report_date" property="reportDate" />
-        <result column="created_at" property="createdAt" />
         <result column="updated_at" property="updatedAt" />
         <result column="quantity" property="quantity" />
 
