@@ -11,9 +11,10 @@
 <body>
 <div layout:fragment="content">
     <h1 th:text="${title}">在庫入力画面</h1>
-    <form method="POST" th:object="${inventoryForm}">
+    <p th:if="${complete}" th:text="${complete}"></p>
+    <form method="POST" th:action="@{/inventory/insert}" th:object="${inventoryForm}">
         <table>
-            <tr>
+           <tr>
                 <td><label>商品名（選択してください）：</label></td>
                 <td>
                     <input type="text" name="name" list="productId" />
@@ -22,19 +23,25 @@
                         </option>
                     </datalist>
                 </td>
+                <td></td>
 
             </tr>
-            <tr>
+             <tr>
                 <td><label>在庫数：</label></td>
                 <td><input type="number" name="quantity" th:value="*{quantity}" /></td>
+
             </tr>
             <tr>
                 <td><label>日付：</label></td>
                 <td><input type="date" name="reportDate" th:value="*{reportDate}" /></td>
             </tr>
+
+
         </table>
+        <div th:if="${#fields.hasErrors('productId')}" th:errors="*{productId}"></div>
+            <div class="text-danger mb-4" th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}"></div>
         <input  th:if="${productId}" type="hidden" name="productId" th:value="${productId}">
-        <input type="submit" value="送信" />
+        <input type="submit" class="btn btn-primary" value="送信" />
     </form>
 </div>
 </body>

@@ -108,8 +108,8 @@ public class ProductController {
      */
     @GetMapping("/{id}")
     public String edit(
-            ProductForm productForm,
             @PathVariable("id") int id,
+            ProductForm productForm,
             Model model) {
         Optional<Product> productOpt = productService.getProduct(id);
 
@@ -131,27 +131,27 @@ public class ProductController {
      */
     @PostMapping("/update")
     public String update(
-        @Validated @ModelAttribute ProductForm productForm,
         @RequestParam("id") int id,
+        @Validated @ModelAttribute ProductForm productForm,
         BindingResult result,
         Model model,
         RedirectAttributes redirectAttributes
         ) {
 
-        Product product = makeProduct(productForm, id);
-
         if (result.hasErrors()) {
             model.addAttribute("title", "商品情報　編集画面");
-            model.addAttribute("product", productForm);
+            model.addAttribute("productForm", productForm);
 
             return "product/edit";
-        } else {
-
-            productService.update(product);
-            redirectAttributes.addFlashAttribute("complete", "変更が完了しました");
-
-            return "redirect:/product/list";
         }
+
+        Product product = makeProduct(productForm, id);
+
+        productService.update(product);
+        redirectAttributes.addFlashAttribute("complete", "変更が完了しました");
+
+        return "redirect:/product/list";
+
     }
 
     /*

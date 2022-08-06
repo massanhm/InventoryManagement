@@ -13,11 +13,14 @@
     <h1 th:text="${title}">在庫検索</h1>
     <p th:if="${complete}" th:text="${complete}"></p>
 
-    <form method="POST" th:action="@{/inventory/id_search}" th:object="${InventorySearchReq}">
+    <form method="POST" th:action="@{/inventory/id_search}" th:object="${inventorySearchReq}">
         <label>日付：</label>
-        <input type="date" name="reportDate"/>
+        <input type="date" name="reportDate" th:value="*{reportDate}"/>
         <input type="submit" class="btn btn-primary" value="　検索　">
+        <div th:if="${#fields.hasErrors('reportDate')}" th:errors="*{reportDate}"></div>
     </form>
+
+
 
     <table class="table table-striped">
       <thead>
