@@ -69,7 +69,7 @@ public class InventoryController {
         model.addAttribute("list", list);
         model.addAttribute("title", "在庫一覧");
 
-        return "redirect:/inventory/index";
+        return "inventory/index";
     }
 
     /*
@@ -77,8 +77,10 @@ public class InventoryController {
      */
     @GetMapping("/form")
     public String form(InventoryForm inventoryForm, Model model) {
-        List<Product> prodList = productService.findAll();
-        model.addAttribute("prodList", prodList);
+        List<Product> info = productService.findAll();
+
+        model.addAttribute("inventoryForm", inventoryForm);
+        model.addAttribute("prodList", info);
         model.addAttribute("title", "在庫数登録画面");
        return "inventory/form";
     }
@@ -94,12 +96,19 @@ public class InventoryController {
             RedirectAttributes redirectAttributes) {
 
         if (result.hasErrors()) {
+            List<Product> info = productService.findAll();
+
             model.addAttribute("inventoryForm", inventoryForm);
+            model.addAttribute("prodList", info);
             model.addAttribute("title", "在庫数登録画面");
 
             return "inventory/form";
         }
 
+        Inventory inventory = makeInventory(inventoryForm);
+
+        inventoryService.create(inventory);
+        model.addAttribute("title", "在庫数登録画面");
         redirectAttributes.addFlashAttribute("complete", "登録完了しました。");
         return "redirect:/inventory/form";
 
@@ -109,8 +118,8 @@ public class InventoryController {
         Inventory inventory = new Inventory();
 
         inventory.setProductsId(inventoryForm.getProductId());
-        inventory.setQuantity(inventoryForm.getQuantity());
-        inventory.setReportDate(inventoryForm.getReportDate());
+        inventory.setQuantity(inventoryForm.getQuantity().floatValue());
+        inventory.setReportDate(java.sql.Date.valueOf(inventoryForm.getReportDate()));
 
         return inventory;
     }

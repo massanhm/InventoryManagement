@@ -25,7 +25,6 @@
     <table class="table table-striped">
       <thead>
         <tr>
-          <th scope="col"></th>
           <th scope="col">商品名/単位</th>
           <th scope="col">在庫数</th>
           <th scope="col">最終更新日時</th>
@@ -34,7 +33,6 @@
       </thead>
       <tbody>
         <tr th:each="obj : ${list}">
-          <td th:text="${obj.id}">(id)</td>
           <td th:text="${obj.productsName.name}">(商品名)</td>
           <td th:text="${obj.quantity}">(在庫数)</td>
           <td th:text="${obj.updatedAt}">(最終更新日時)</td>
