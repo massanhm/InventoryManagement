@@ -5,18 +5,26 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <body>
 <header layout:fragment="header">
-<nav class="navbar navbar-expand-sm navbar-dark bg-dark mb-4">
+<nav class="navbar sticky-top navbar-expand-sm navbar-dark bg-dark mb-4">
  <div class="container-fluid">
     <a class="navbar-brand" href="/" th:href="@{/}">在庫管理システム</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+    <div class="collapse navbar-collapse justify-content-start" id="navbarSupportedContent">
+      <ul class="navbar-nav">
+        <li class="nav-item" ><a href="/inventory/search" class="nav-link">在庫照会</a></li>
+        <li class="nav-item" ><a href="/inventory/form" class="nav-link">在庫入力</a></li>
+        <li class="nav-item" ><a href="/product/form" class="nav-link">商品登録</a></li>
+        <li class="nav-item" ><a href="/product/list" class="nav-link">商品一覧</a></li>
+      </ul>
+    </div>
 
+    <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
       <ul class="navbar-nav">
         <li class="nav-item" ><a href="#" class="nav-link">ユーザー名</a></li>
-        <li class="nav-item"><a href=".session/logout.html" th:href="@{logout}" class="nav-link">Logout</a></li>
+        <li class="nav-item"><a href=".session/logout.html" th:href="@{logout}" class="nav-link">ログアウト</a></li>
       </ul>
     </div>
   </div>
