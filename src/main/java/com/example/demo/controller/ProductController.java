@@ -108,7 +108,7 @@ public class ProductController {
      */
     @GetMapping("/{id}")
     public String edit(
-            @PathVariable("id") int id,
+            @PathVariable("id")  int id,
             ProductForm productForm,
             Model model) {
         Optional<Product> productOpt = productService.getProduct(id);
@@ -131,7 +131,7 @@ public class ProductController {
      */
     @PostMapping("/update")
     public String update(
-        @RequestParam("id") int id,
+        @RequestParam("id")  int id,
         @Validated @ModelAttribute ProductForm productForm,
         BindingResult result,
         Model model,

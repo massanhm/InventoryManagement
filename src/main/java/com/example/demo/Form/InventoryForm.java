@@ -1,6 +1,5 @@
 package com.example.demo.Form;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import javax.validation.constraints.NotNull;
@@ -16,11 +15,11 @@ public class InventoryForm {
 
 
     @NotNull(message ="商品名を選択してください。")
-    private Integer productId;
+    private int productId;
 
     @NotNull(message = "数値を入力してください。")
     @PositiveOrZero(message = "正の数を入力してください。")
-    private BigDecimal quantity;
+    private float quantity;
 
     @NotNull(message = "日付を設定してください。")
     @DateTimeFormat(pattern = "yyyy-MM-dd")

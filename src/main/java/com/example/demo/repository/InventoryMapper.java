@@ -2,6 +2,7 @@ package com.example.demo.repository;
 
 import java.sql.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -14,6 +15,12 @@ public interface InventoryMapper {
 
     List<Inventory> findByDate(Date sqlDate);
 
-    void insert(Inventory inventory);
+    Optional<Inventory> findById(int id);
+
+    void create(Inventory inventory);
+
+    int update(Inventory inventory);
+
+//    int deleteById(int id);
 
 }

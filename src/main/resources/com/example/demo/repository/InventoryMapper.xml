@@ -16,6 +16,37 @@
         WHERE I.report_date = #{sqlDate}
     </select>
 
+   <select id="findById" resultMap="InvResultMap">
+        SELECT
+            I.id,
+            I.products_id,
+            I.quantity,
+            I.report_date,
+            P.name
+        FROM
+            inventorys AS I
+        INNER JOIN
+            products AS P ON I.products_id = P.id
+        WHERE I.id = #{id}
+    </select>
+
+    <insert id="create" parameterType="com.example.demo.entity.Inventory">
+        INSERT INTO inventorys ( products_id, quantity, report_date )
+        VALUES ( #{productsId}, #{quantity}, #{reportDate})
+    </insert>
+
+
+   <update id="update">
+      update inventorys set
+        products_id = #{productsId},
+        quantity = #{quantity},
+        report_date = #{reportDate}
+      where id = #{id}
+   </update>
+
+    <!-- <delete id="deleteById">
+      delete from inventorys where id = #{id}
+    </delete>  -->
 
     <resultMap id="InvResultMap" type="com.example.demo.entity.Inventory">
         <id column="id" property="id"/>
