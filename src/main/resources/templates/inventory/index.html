@@ -13,7 +13,7 @@
     <h1 th:text="${title}">在庫検索</h1>
     <p th:if="${complete}" th:text="${complete}"></p>
 
-<div class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4">
+    <div class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4">
       <form method="POST" th:action="@{/inventory/id_search}" th:object="${inventorySearchReq}">
         <label>日付：</label>
         <input type="date" name="reportDate" th:value="*{reportDate}"/>
@@ -26,8 +26,7 @@
       </nav>
     </div>
 
-    <table class="table table-striped" style="max-width :1000px; margin-left: auto;
-    margin-right: auto;">
+    <table class="table table-striped" style="max-width :1000px; margin-left: auto; margin-right: auto;">
       <thead>
         <tr>
           <th scope="col">商品名/単位</th>
@@ -43,11 +42,12 @@
           <td th:text="${obj.updatedAt}">(最終更新日時)</td>
           <td><a class="btn btn-outline-primary" th:href="@{/inventory/{id}(id=${obj.id})}">編集</a></td>
           <td>
-            <button class="delete-action btn btn-outline-danger" type="submit">削除</button>
+            <form method="POST" th:action="@{/inventory/delete}">
+              <button class="delete-action btn btn-outline-danger" type="submit">削除</button>
+              <input type="hidden" name="id" th:value="${obj.id}">
+            </form>
           </td>
-
         </tr>
-
       </tbody>
     </table>
 </div>
