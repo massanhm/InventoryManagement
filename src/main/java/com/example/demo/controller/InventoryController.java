@@ -158,8 +158,12 @@ public class InventoryController {
         ) {
 
         if (result.hasErrors()) {
-            model.addAttribute("title", "在庫情報　編集画面");
             model.addAttribute("inventoryForm", inventoryForm);
+
+            List<Product> info = productService.findAll();
+            model.addAttribute("prodList", info);
+            model.addAttribute("Id", id);
+            model.addAttribute("title", "在庫情報　編集画面");
 
             return "inventory/edit";
         }
@@ -171,6 +175,19 @@ public class InventoryController {
 
         return "redirect:/inventory/search";
 
+    }
+
+    /*
+     * 一件在庫idを取得し、一件のデータを削除
+     */
+    @PostMapping("/delete")
+    public String delete(
+        @RequestParam("id") int id,
+        Model model
+        ) {
+
+        inventoryService.deleteById(id);
+        return "redirect:/inventory/search";
     }
 
     /*

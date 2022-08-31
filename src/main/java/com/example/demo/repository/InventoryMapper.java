@@ -21,6 +21,6 @@ public interface InventoryMapper {
 
     int update(Inventory inventory);
 
-//    int deleteById(int id);
+    int deleteById(int id);
 
 }

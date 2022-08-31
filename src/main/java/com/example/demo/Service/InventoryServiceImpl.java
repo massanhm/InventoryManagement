@@ -46,12 +46,12 @@ public class InventoryServiceImpl implements InventoryService {
         }
 
     }
-//
-//    @Override
-//    public void deleteById(int id) {
-//        if (inventoryMapper.deleteById(id) == 0) {
-//            throw new InvNotFoundException("削除する情報が存在しません");
-//        }
-//    }
+
+    @Override
+    public void deleteById(int id) {
+        if (inventoryMapper.deleteById(id) == 0) {
+            throw new InvNotFoundException("削除する情報が存在しません");
+        }
+    }
 
 }

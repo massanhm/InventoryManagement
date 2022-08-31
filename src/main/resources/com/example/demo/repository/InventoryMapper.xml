@@ -36,17 +36,17 @@
     </insert>
 
 
-   <update id="update">
+    <update id="update">
       update inventorys set
         products_id = #{productsId},
         quantity = #{quantity},
         report_date = #{reportDate}
       where id = #{id}
-   </update>
+    </update>
 
-    <!-- <delete id="deleteById">
+    <delete id="deleteById">
       delete from inventorys where id = #{id}
-    </delete>  -->
+    </delete>
 
     <resultMap id="InvResultMap" type="com.example.demo.entity.Inventory">
         <id column="id" property="id"/>
