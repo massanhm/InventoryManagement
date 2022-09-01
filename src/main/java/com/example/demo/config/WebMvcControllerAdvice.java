@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.InitBinder;
 
+import com.example.demo.Service.InvNotFoundException;
 import com.example.demo.Service.ProductNotFoundException;
 
 
@@ -23,6 +24,12 @@ public class WebMvcControllerAdvice {
 
     @ExceptionHandler(ProductNotFoundException.class)
     public String handleException(ProductNotFoundException e,Model model) {
+        model.addAttribute("message", e);
+        return "error/CustomPage";
+    }
+
+    @ExceptionHandler(InvNotFoundException.class)
+    public String handleException(InvNotFoundException e,Model model) {
         model.addAttribute("message", e);
         return "error/CustomPage";
     }
