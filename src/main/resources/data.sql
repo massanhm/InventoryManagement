@@ -1,6 +1,6 @@
 --password1234
---INSERT INTO USERS (username, password) VALUES ('test1', 'password1234');
---INSERT INTO USERS (username, password) VALUES ('test2', 'password1234');
+INSERT INTO USERS (username, email, password) VALUES ('test1', 'test1@example.com', 'password1234');
+INSERT INTO USERS (username, email, password) VALUES ('test2', 'test2@example.com', 'password1234');
 
 INSERT INTO inventorys (products_id, quantity, report_date) VALUES ('1', '3.0', '2022-07-07');
 INSERT INTO inventorys (products_id, quantity, report_date) VALUES ('2', '7.0', '2022-07-07');
