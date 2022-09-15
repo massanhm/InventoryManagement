@@ -16,25 +16,37 @@
     <div class="container">
       <h1>ユーザー登録フォーム</h1>
       <p>本サイトにユーザー登録をする方はこちらから</p>
-      <form>
+      <form th:object="${signupForm}">
         <div class="form-group mb-3">
           <label for="inputName">ユーザー名</label>
-          <input type="text" class="form-control" id="inputName" aria-describedby="nameHelp" placeholder="ユーザー名" accept=""required="required">
+          <input type="text" class="form-control" id="inputName" th:value="*{username}"
+            aria-describedby="nameHelp" placeholder="ユーザー名">
           <small id="nameHelp" class="form-text text-muted">2文字以上50文字以内</small>
+          <div class="text-danger mb-4" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
         </div>
         <div class="form-group mb-3">
           <label for="inputEmail">メールアドレス</label>
-          <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" placeholder="メールアドレス" required="required">
-          <small id="emailHelp" class="form-text text-muted">本サイトからのメールが受信可能なメールアドレス</small>
+          <input type="email" class="form-control" id="inputEmail" th:value="*{email}"
+            aria-describedby="emailHelp" placeholder="メールアドレス">
+          <small id="emailHelp" class="form-text text-muted">
+            本サイトからのメールが受信可能なメールアドレス
+         </small>
+         <div class="text-danger mb-4" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
         </div>
         <div class="form-group mb-3">
           <label for="inputPassword">パスワード</label>
-          <input type="password" class="form-control" id="inputPassword"  aria-describedby="passwordHelp" placeholder="パスワード" required="required">
-          <small id="passwordHelp" class="form-text text-muted">パスワードは8文字以上20文字以内。使用出来る文字は半角英大文字、半角英小文字、数字、記号（@#$%&?!）</small>
+          <input type="password" class="form-control" id="inputPassword" th:value="*{password}"
+            aria-describedby="passwordHelp" placeholder="パスワード">
+          <small id="passwordHelp" class="form-text text-muted">
+            パスワードは8文字以上20文字以内。使用出来る文字は半角英大文字、半角英小文字、数字、記号（@#$%&?!）
+          </small>
+          <div class="text-danger mb-4" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
         </div>
         <div class="form-group mb-3">
           <label for="inputPasswordAgain">パスワード（確認）</label>
-          <input type="password" class="form-control" id="inputPasswordAgain" placeholder="パスワード（確認）" required="required">
+          <input type="password" class="form-control" id="inputPasswordAgain" th:value="*{passwordConfirmation}"
+            placeholder="パスワード（確認）">
+            <div class="text-danger mb-4" th:if="${#fields.hasErrors('passwordConfirmation')}" th:errors="*{passwordConfirmation}"></div>
         </div>
         <div>
           <input type="submit" class="btn btn-primary" value="登録">
