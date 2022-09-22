@@ -1,4 +1,4 @@
-package com.example.demo.Form;
+package com.example.demo.form;
 
 import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.NotNull;
@@ -22,8 +22,9 @@ public class SignupForm {
 
     @NotNull(message = "パスワードを入力してください")
     @Size(min = 8, max = 20, message = "8文字20文字以下で入力してください")
-    @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&-+=()])(?=\\S+$)",
-            message = "正しい形式で入力して下さい")
+//    @Pattern(regexp =
+//            "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])$",
+//    message = "正しい形式で入力して下さい")
     private String password;
 
     @NotNull(message = "パスワードを入力してください")

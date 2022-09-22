@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.example.demo.Form.SignupForm;
-import com.example.demo.Service.UserService;
 import com.example.demo.entity.User;
+import com.example.demo.form.SignupForm;
+import com.example.demo.service.UserService;
 
 import lombok.RequiredArgsConstructor;
 

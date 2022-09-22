@@ -1,4 +1,4 @@
-package com.example.demo.Form;
+package com.example.demo.form;
 
 import java.time.LocalDate;
 

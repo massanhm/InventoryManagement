@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.example.demo.Form.ProductForm;
-import com.example.demo.Service.ProductService;
 import com.example.demo.entity.Product;
+import com.example.demo.form.ProductForm;
+import com.example.demo.service.ProductService;
 
 import lombok.RequiredArgsConstructor;
 

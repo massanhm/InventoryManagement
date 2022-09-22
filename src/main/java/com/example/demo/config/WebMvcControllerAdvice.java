@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.InitBinder;
 
-import com.example.demo.Service.InvNotFoundException;
-import com.example.demo.Service.ProductNotFoundException;
+import com.example.demo.service.InvNotFoundException;
+import com.example.demo.service.ProductNotFoundException;
 
 
 @ControllerAdvice

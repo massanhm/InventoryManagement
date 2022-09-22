@@ -15,12 +15,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.example.demo.Form.InventoryForm;
-import com.example.demo.Form.InventorySearchReq;
-import com.example.demo.Service.InventoryService;
-import com.example.demo.Service.ProductService;
 import com.example.demo.entity.Inventory;
 import com.example.demo.entity.Product;
+import com.example.demo.form.InventoryForm;
+import com.example.demo.form.InventorySearchReq;
+import com.example.demo.service.InventoryService;
+import com.example.demo.service.ProductService;
 
 import lombok.RequiredArgsConstructor;
 
