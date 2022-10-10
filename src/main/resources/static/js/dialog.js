@@ -4,3 +4,10 @@ $('.delete-action').click(function() {
     return false;
   }
 });
+
+const LOGOUT_MESSAGE = "ログアウトしてもよろしいですか？"
+$('.logout-action').click(function() {
+  if(!confirm(LOGOUT_MESSAGE)){
+    return false;
+  }
+});

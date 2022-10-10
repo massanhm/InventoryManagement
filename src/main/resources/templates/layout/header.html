@@ -23,8 +23,12 @@
 
     <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
       <ul class="navbar-nav">
-        <li class="nav-item" ><a href="#" class="nav-link">ユーザー名</a></li>
-        <li class="nav-item"><a href=".session/logout.html" th:href="@{logout}" class="nav-link">ログアウト</a></li>
+        <li class="nav-item" ><a href="#" class="nav-link" sec:authentication="name"></a></li>
+        <li class="nav-item">
+          <form th:action="@{/logout}" method="post">
+            <input type="submit" class="btn btn-dark logout-action" value="ログアウト" />
+          </form>
+        </li>
       </ul>
     </div>
   </div>
