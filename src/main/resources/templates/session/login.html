@@ -17,7 +17,8 @@
       <div class="col-md-6 offset-md-3">
         <h2 class="text-center text-dark mt-5">ログインフォーム</h2>
         <div class="card my-5">
-          <div th:if=${param.error}><p>メールアドレスもしくはパスワードが違います</p></div>
+          <!-- <div th:if=${param.logout}>You have been logged out.</div> -->
+          <div th:if=${param.error}>ユーザーネームもしくはパスワードが違います</div>
           <form action="#" th:action="@{/login}" method="post" class="card-body cardbody-color p-lg-5">
 
             <div class="text-center">
@@ -27,11 +28,11 @@
             </div>
 
             <div class="mb-3">
-              <input type="text" class="form-control" id="email" name="email" aria-describedby="emailHelp"
-                placeholder="メールアドレス">
+              <input type="text" class="form-control" id="usernameInput" name="username" aria-describedby="nameHelp"
+                placeholder="ユーザーネーム">
             </div>
             <div class="mb-3">
-              <input type="password" class="form-control" id="password" placeholder="パスワード">
+              <input type="password" class="form-control" id="passwordInput" name="password" placeholder="パスワード">
             </div>
             <div class="text-center"><button type="submit" class="btn btn-color px-5 mb-5 w-100">ログイン</button></div>
             <div id="emailHelp" class="form-text text-center mb-5 text-dark">
