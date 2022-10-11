@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.example.demo.entity.User;
 import com.example.demo.form.SignupForm;
 import com.example.demo.service.UserService;
 
@@ -41,8 +40,6 @@ public class UserController {
             RedirectAttributes redirectAttributes
             ) {
 
-        User user = makeUser(signupForm, 0);
-
         if (result.hasErrors()) {
             model.addAttribute("signupForm", signupForm);
             model.addAttribute("title", "ユーザー登録画面");
@@ -50,20 +47,9 @@ public class UserController {
             return "user/signup";
         }
 
-        userService.create(user);
+        userService.create(signupForm.getUsername(), signupForm.getPassword());
         redirectAttributes.addFlashAttribute("complete", "ユーザー登録が完了しました。");
 
         return "redirect:/signup";
-    }
-
-    private User makeUser(SignupForm signupForm, int id) {
-        User user = new User();
-
-        user.setId(id);
-        user.setUsername(signupForm.getUsername());
-        user.setEmail(signupForm.getEmail());
-        user.setPassword(signupForm.getPassword());
-
-        return user;
     }
 }

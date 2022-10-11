@@ -14,17 +14,11 @@ public class SignupForm {
     @Size(min = 2, max = 50, message = "2文字40文字以下で入力してください")
     private String  username;
 
-    @NotNull(message = "メールアドレスを入力してください")
-    @Size(max = 100, message = "2文字100文字以下で入力してください")
-    @Pattern(regexp = "[\\w\\-._]+@[\\w\\-._]+\\.[A-Za-z]+",
-            message = "正しい形式で入力して下さい")
-    private String  email;
-
     @NotNull(message = "パスワードを入力してください")
     @Size(min = 8, max = 20, message = "8文字20文字以下で入力してください")
-//    @Pattern(regexp =
-//            "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])$",
-//    message = "正しい形式で入力して下さい")
+    @Pattern(regexp =
+            "^(?=.*[A-Z])(?=.*[.?/-])[a-zA-Z0-9.?/-]{8,20}$",
+    message = "正しい形式で入力して下さい")
     private String password;
 
     @NotNull(message = "パスワードを入力してください")

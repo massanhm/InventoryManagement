@@ -28,7 +28,7 @@ public class SecurityConfig {
         ).authorizeHttpRequests(authz -> authz
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations())
                 .permitAll()
-                .mvcMatchers("/signup")
+                .mvcMatchers("/signup", "/usercreate")
                 .permitAll()
                 .anyRequest().authenticated()
         );

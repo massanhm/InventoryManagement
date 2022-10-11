@@ -27,21 +27,11 @@
         </div>
 
         <div class="mt-3">
-            <label for="emailInput" class="form-label">メールアドレス</label>
-            <input type="text" id="emailInput" class="form-control" th:field="*{email}"
-                th:classappend="${#fields.hasErrors('email')} ? is-invalid">
-            <small id="emailHelp" class="form-text text-muted">
-              本サイトからのメールが受信可能なメールアドレス
-            </small>
-            <p class="invalid-feedback" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
-        </div>
-
-        <div class="mt-3">
             <label for="passwordInput" class="form-label">パスワード</label>
             <input type="password" id="passwordInput" class="form-control" th:field="*{password}"
                 th:classappend="${#fields.hasErrors('password')} ? is-invalid">
             <small id="passwordHelp" class="form-text text-muted">
-              パスワードは8文字以上20文字以内。使用出来る文字は半角英大文字、半角英小文字、数字、記号（@#$%&?!）
+              パスワードは8文字以上20文字以内。使用出来る文字は半角英大文字、半角英小文字、数字、記号（./?-）
             </small>
             <p class="invalid-feedback" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
         </div>

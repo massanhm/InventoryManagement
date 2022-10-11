@@ -1,11 +1,12 @@
 package com.example.demo.repository;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
-
-import com.example.demo.entity.User;
+import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface UserMapper {
 
-    void create(User user);
+    @Insert("INSERT INTO users (username, password) values (#{username}, #{password})")
+    void create(@Param("username") String username, @Param("password") String password);
 }
