@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,13 +13,13 @@ import lombok.RequiredArgsConstructor;
 public class UserServiceImpl implements UserService {
 
     private final UserMapper userMapper;
-//    private final PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     @Transactional
     public void create(String username, String password) {
-//        var encodedPassword = passwordEncoder.encode(password);
-        userMapper.create(username, password);
+        var encodedPassword = passwordEncoder.encode(password);
+        userMapper.create(username, encodedPassword);
     }
 
 }
