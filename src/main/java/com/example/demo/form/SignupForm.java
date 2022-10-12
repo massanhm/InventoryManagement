@@ -5,6 +5,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import com.example.demo.validation.UniqueUsername;
+
 import lombok.Data;
 
 @Data
@@ -12,6 +14,7 @@ public class SignupForm {
 
     @NotNull(message = "名前を入力してください")
     @Size(min = 2, max = 50, message = "2文字40文字以下で入力してください")
+    @UniqueUsername
     private String  username;
 
     @NotNull(message = "パスワードを入力してください")
